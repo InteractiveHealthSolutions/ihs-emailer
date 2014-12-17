@@ -29,14 +29,14 @@ Instantiate a singleton EmailEngine with properties below
 - mail.smtp.port = 465			(your port)
 - emailer.admin-email = admin.emailer@abc.org (mandatory if you want to use emailToAdmin component of API)
 
-<b><u>Instantiate (mandatory)</u></b>
+#### Instantiate (mandatory)
 
 	EmailEngine.instantiateEmailEngine(prop); 
 	
 // where prop is java.util.Properties with above keys. This method must be called once 
 // and only once in code before using Emailer.
 	
-<b><u>Quick Email to Admin (property: emailer.admin-email)</u></b>
+#### Quick Email to Admin (property: emailer.admin-email)
 		
 //To use these methods property emailer.admin-email must have been specified at instantiation
 	
@@ -47,7 +47,7 @@ Instantiate a singleton EmailEngine with properties below
 // emailReportToAdmin method blocks your code until email has been sent. If operation is time critical
 // you can use this method to move forward and leaving the email been sent in background thread.
 	
-<b><u>Customized Emails to specified recipients</u></b>
+#### Customized Emails to specified recipients
 
 	- EmailEngine.getInstance().postSimpleMail(new String[]{"me@me.com"}, "Subject", "Body", "abc@me.com");
 
