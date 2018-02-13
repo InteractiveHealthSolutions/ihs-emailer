@@ -1,4 +1,4 @@
-package org.ihs.emailer;
+package com.ihsinformatics.emailer;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -55,39 +55,54 @@ public class EmailServer {
 		if (SMTP_HOST_NAME == null) {
 			throw new EmailException(EmailException.NO_MAIL_HOST);
 		}
-		
+
 		String isauth = props.getProperty("mail.smtp.auth", "true");
-		props.put("mail.smtp.auth", isauth);//put true if no property was found and default was returned
-		
+		props.put("mail.smtp.auth", isauth);// put true if no property was found
+											// and default was returned
+
 		if (isauth != null && isauth.compareTo("true") == 0) {
 			SMTP_AUTH_USER = props.getProperty("mail.user.username");
 			if (SMTP_AUTH_USER == null) {
 				throw new EmailException(EmailException.NO_USERNAME);
 			}
-			
+
 			SMTP_AUTH_PWD = props.getProperty("mail.user.password");
 			if (SMTP_AUTH_PWD == null) {
 				throw new EmailException(EmailException.NO_PASSWORD);
 			}
 		}
-		
+
 		String protocol = props.getProperty("mail.transport.protocol", "smtp");
-		props.setProperty("mail.transport.protocol", protocol);//put smtp if no property was found and default was returned
-		
-		String port = props.getProperty("mail.smtp.port", "465");//put 465 if no property was found and default was returned
+		props.setProperty("mail.transport.protocol", protocol);// put smtp if no
+																// property was
+																// found and
+																// default was
+																// returned
+
+		String port = props.getProperty("mail.smtp.port", "465");// put 465 if
+																	// no
+																	// property
+																	// was found
+																	// and
+																	// default
+																	// was
+																	// returned
 		props.put("mail.smtp.port", port);
 		props.put("mail.smtp.socketFactory.port", port);
-		
+
 		// defaults
-		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		props.put("mail.smtp.socketFactory.class",
+				"javax.net.ssl.SSLSocketFactory");
 		props.put("mail.smtp.socketFactory.fallback", "false");
 		props.setProperty("mail.smtp.quitwait", "false");
 	}
 
-	public boolean postSimpleMail(String recipients[], String subject, String message, String from) throws MessagingException {
+	public boolean postSimpleMail(String recipients[], String subject,
+			String message, String from) throws MessagingException {
 		boolean debug = false;
 
-		Session session = Session.getDefaultInstance(getProperties(), getAuthenticator());
+		Session session = Session.getDefaultInstance(getProperties(),
+				getAuthenticator());
 		session.setDebug(debug);
 
 		// create a message
@@ -110,7 +125,8 @@ public class EmailServer {
 		return true;
 	}
 
-	public boolean postHtmlMail(String recipients[], String subject, String htmlmsg, String from) throws MessagingException {
+	public boolean postHtmlMail(String recipients[], String subject,
+			String htmlmsg, String from) throws MessagingException {
 		System.out.println("\nSending email to :");
 		for (String s : recipients) {
 			System.out.print(s + ",");
@@ -118,7 +134,8 @@ public class EmailServer {
 		System.out.println("with subject:" + subject);
 		boolean debug = false;
 
-		Session session = Session.getDefaultInstance(getProperties(), getAuthenticator());
+		Session session = Session.getDefaultInstance(getProperties(),
+				getAuthenticator());
 		session.setDebug(debug);
 		MimeMessage message = new MimeMessage(session);
 
@@ -142,7 +159,8 @@ public class EmailServer {
 
 	public void postEmailWithAttachment(String recipients[], String subject,
 			String htmlmsg, String from, byte[] bytes, String filename,
-			AttachmentType attachmentType) throws MessagingException, IOException {
+			AttachmentType attachmentType) throws MessagingException,
+			IOException {
 		System.out.println("\nSending email to :");
 		for (String s : recipients) {
 			System.out.print(s + ",");
@@ -150,7 +168,8 @@ public class EmailServer {
 		System.out.println("with subject:" + subject);
 		boolean debug = false;
 
-		Session session = Session.getDefaultInstance(getProperties(), getAuthenticator());
+		Session session = Session.getDefaultInstance(getProperties(),
+				getAuthenticator());
 		session.setDebug(debug);
 		MimeMessage message = new MimeMessage(session);
 
@@ -178,7 +197,8 @@ public class EmailServer {
 
 		// Part two is attachment
 		messageBodyPart = new MimeBodyPart();
-		DataSource source = new ByteArrayDataSource(bytes, attachmentType.TYPE());
+		DataSource source = new ByteArrayDataSource(bytes,
+				attachmentType.TYPE());
 		messageBodyPart.setDataHandler(new DataHandler(source));
 		messageBodyPart.setFileName(filename);
 		multipart.addBodyPart(messageBodyPart);

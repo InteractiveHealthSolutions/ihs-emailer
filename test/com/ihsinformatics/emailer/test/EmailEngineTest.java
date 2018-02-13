@@ -1,4 +1,4 @@
-package org.ihs.emailer;
+package com.ihsinformatics.emailer.test;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,16 +6,19 @@ import java.util.Properties;
 
 import javax.mail.MessagingException;
 
-import org.ihs.emailer.EmailEngineTest.EmailSender1Test;
-import org.ihs.emailer.EmailEngineTest.EmailSender2Test;
-import org.ihs.emailer.EmailEngineTest.EmailSender3Test;
-import org.ihs.emailer.EmailEngineTest.Emailer1Test;
-import org.ihs.emailer.EmailEngineTest.Emailer2Test;
-import org.ihs.emailer.EmailEngineTest.Emailer3Test;
-import org.ihs.emailer.EmailServer.AttachmentType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+
+import com.ihsinformatics.emailer.EmailEngine;
+import com.ihsinformatics.emailer.EmailException;
+import com.ihsinformatics.emailer.EmailServer.AttachmentType;
+import com.ihsinformatics.emailer.test.EmailEngineTest.EmailSender1Test;
+import com.ihsinformatics.emailer.test.EmailEngineTest.EmailSender2Test;
+import com.ihsinformatics.emailer.test.EmailEngineTest.EmailSender3Test;
+import com.ihsinformatics.emailer.test.EmailEngineTest.Emailer1Test;
+import com.ihsinformatics.emailer.test.EmailEngineTest.Emailer2Test;
+import com.ihsinformatics.emailer.test.EmailEngineTest.Emailer3Test;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
